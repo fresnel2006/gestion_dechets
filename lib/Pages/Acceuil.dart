@@ -4,14 +4,15 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_zoom_drawer/src/drawer_controller.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:lottie/lottie.dart' hide Marker;
 import 'package:http/http.dart' as http;
 
 class AcceuilPage extends StatefulWidget {
-  const AcceuilPage({super.key});
-
+  const AcceuilPage({required this.controller});
+  final ZoomDrawerController controller;
 
   @override
   State<AcceuilPage> createState() => _AcceuilPageState();
@@ -131,7 +132,9 @@ class _AcceuilPageState extends State<AcceuilPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-            Container(margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.07),decoration: BoxDecoration(border: Border.all(color: Colors.black),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *1))),child: CircleAvatar(backgroundColor: Colors.white,radius:MediaQuery.of(context).size.width *0.05,child: IconButton(onPressed: (){}, icon: Icon(Icons.menu,size: MediaQuery.of(context).size.width *0.05,color: Colors.green),),)
+            Container(margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.07),decoration: BoxDecoration(border: Border.all(color: Colors.black),borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *1))),child: CircleAvatar(backgroundColor: Colors.white,radius:MediaQuery.of(context).size.width *0.05,child: IconButton(onPressed: (){
+              widget.controller.toggle!();
+            }, icon: Icon(Icons.menu,size: MediaQuery.of(context).size.width *0.05,color: Colors.green),),)
             ),
             Container(margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *0.07),height: MediaQuery.of(context).size.height *0.065,width: MediaQuery.of(context).size.width *0.6,decoration:BoxDecoration(border: Border.all(color: Colors.black),color: Colors.white,borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *1),),),child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -144,9 +147,10 @@ class _AcceuilPageState extends State<AcceuilPage> {
             ),
           ],),
         Container(
-            child: ListView.builder(itemCount: 2,itemBuilder: (context, index) {
+          //Ajoute les differentes conducteurs apres
+            child: ListView.builder(itemCount: 0,itemBuilder: (context, index) {
               return Stack(
-                 alignment: AlignmentGeometry.center,
+                alignment: AlignmentGeometry.center,
                 children: [
                 Container(margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height *0.025),child: ListTile(title: Text("service",style: TextStyle(overflow: TextOverflow.ellipsis,color: Colors.white)),subtitle: Text("service en cours",style: TextStyle(overflow: TextOverflow.ellipsis),),leading: CircleAvatar(radius: MediaQuery.of(context).size.width *0.075,),),height: 80,width: 250,decoration: BoxDecoration(color: Colors.lightGreen,borderRadius: BorderRadius.all(Radius.circular(MediaQuery.of(context).size.width *0.15))),)
                   ,Container(margin:EdgeInsets.only(left: MediaQuery.of(context).size.width *0.68),child: CircleAvatar(radius:MediaQuery.of(context).size.width *0.07 ,child: Icon(Icons.arrow_forward),),)

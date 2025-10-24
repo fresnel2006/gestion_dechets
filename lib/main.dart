@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hackaton/Pages/Acceuil.dart';
 import 'package:hackaton/Pages/Connexion.dart';
 import 'package:hackaton/Pages/CreationCompte.dart';
+import 'package:hackaton/Pages/Drawer.dart';
 
 import 'package:hackaton/Pages/Inscription.dart';
 
@@ -20,7 +21,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: AcceuilPage()
+        body: DrawerPage()
       ),
     );
   }
